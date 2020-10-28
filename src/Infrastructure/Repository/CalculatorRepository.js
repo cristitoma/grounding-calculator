@@ -1,4 +1,4 @@
-import AbstractProjectRepository from '../../Application/Repository/AbstractProjectRepository'
+import AbstractProjectRepository from "~/Application/Repository/AbstractProjectRepository";
 
 class CalculatorRepository extends AbstractProjectRepository {
     prefix = 'calculator_';

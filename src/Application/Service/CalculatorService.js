@@ -1,5 +1,5 @@
-import Calculator from "../../Domain/Entity/Calculator";
-import CalculatorResultDto from "../Dto/CalculatorResultDto";
+import CalculatorResultDto from "~/Application/Dto/CalculatorResultDto";
+import Calculator from "~/Domain/Entity/Calculator";
 
 class CalculatorService {
     /**

@@ -1,8 +1,8 @@
-import SessionStorage from "./Storage/SessionStorage";
-import ProjectRepository from "./Repository/ProjectRepository";
-import ProjectController from "../Interface/Controller/ProjectController";
-import CalculatorController from "../Interface/Controller/CalculatorController";
-import CalculatorRepository from "./Repository/CalculatorRepository";
+import SessionStorage from "~/Infrastructure/Storage/SessionStorage";
+import ProjectRepository from "~/Infrastructure/Repository/ProjectRepository";
+import CalculatorRepository from "~/Infrastructure/Repository/CalculatorRepository";
+import ProjectController from "~/Interface/Controller/ProjectController";
+import CalculatorController from "~/Interface/Controller/CalculatorController";
 
 class GroundingCalculator {
     constructor() {

@@ -1,4 +1,4 @@
-import CalculatorResult from "../ValueObject/CalculatorResult";
+import CalculatorResult from "~/Domain/ValueObject/CalculatorResult";
 
 class Calculator {
     constructor(

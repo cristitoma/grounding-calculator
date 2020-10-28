@@ -1,5 +1,5 @@
-import CalculatorService from "../../Application/Service/CalculatorService";
-import CalculateResponse from "../Response/CalculateResponse";
+import CalculatorService from "~/Application/Service/CalculatorService";
+import CalculateResponse from "~/Interface/Response/CalculateResponse";
 
 class CalculatorController {
     /**

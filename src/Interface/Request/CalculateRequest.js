@@ -1,6 +1,6 @@
-import Calculate from "../../Application/Command/Calculate";
-import NumericField from "../FieldType/NumericField";
-import SelectField from "../FieldType/SelectField";
+import Calculate from "~/Application/Command/Calculate";
+import NumericField from "~/Interface/FieldType/NumericField";
+import SelectField from "~/Interface/FieldType/SelectField";
 
 class CalculateRequest extends Calculate {
     isValid() {

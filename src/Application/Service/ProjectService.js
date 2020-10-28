@@ -1,6 +1,6 @@
-import Project from '../../Domain/Entity/Project';
-import Beneficiary from "../../Domain/ValueObject/Beneficiary";
-import Drafter from "../../Domain/ValueObject/Drafter";
+import Project from "~/Domain/Entity/Project";
+import Beneficiary from "~/Domain/ValueObject/Beneficiary";
+import Drafter from "~/Domain/ValueObject/Drafter";
 
 class ProjectService {
     /**

@@ -1,4 +1,4 @@
-import AbstractStorage from './AbstractStorage'
+import AbstractStorage from "~/Infrastructure/Storage/AbstractStorage";
 
 class SessionStorage extends AbstractStorage {
     storage = {};

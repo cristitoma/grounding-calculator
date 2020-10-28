@@ -1,5 +1,5 @@
-import ProjectService from '../../Application/Service/ProjectService';
-import CreateProjectResponse from '../Response/CreateProjectResponse';
+import ProjectService from "~/Application/Service/ProjectService";
+import CreateProjectResponse from "~/Interface/Response/CreateProjectResponse";
 
 class ProjectController {
 

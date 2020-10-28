@@ -1,9 +1,9 @@
-import CreateProject from '../../Application/Command/CreateProject';
-import NumericField from "../FieldType/NumericField";
-import StringField from "../FieldType/StringField";
-import PhoneField from "../FieldType/PhoneField";
-import EmailField from "../FieldType/EmailField";
-import DateField from "../FieldType/DateField";
+import CreateProject from "~/Application/Command/CreateProject";
+import NumericField from "~/Interface/FieldType/NumericField";
+import StringField from "~/Interface/FieldType/StringField";
+import PhoneField from "~/Interface/FieldType/PhoneField";
+import EmailField from "~/Interface/FieldType/EmailField";
+import DateField from "~/Interface/FieldType/DateField";
 
 class CreateProjectRequest extends CreateProject {
     isValid() {

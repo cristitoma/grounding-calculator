@@ -95,6 +95,23 @@ class CalculateRequest extends Calculate {
             }),
         }
     }
+    
+    static fromObject(object) {
+        return new CalculateRequest(
+            object.projectId,
+            object.verticalElectrodeDiameter,
+            object.verticalElectrodeLength,
+            object.verticalElectrodeDepth,
+            object.soilType,
+            object.numberOfVerticalElectrodes,
+            object.distanceBetweenVerticalElectrodesL,
+            object.verticalElectrodesPlacement,
+            object.strapLength,
+            object.strapWidth,
+            object.numberOfHorizontalGrounding,
+            object.groundDispersionResistance,
+        );
+    }
 }
 
 export default CalculateRequest;

@@ -59,6 +59,22 @@ class CreateProjectRequest extends CreateProject {
             }),
         }
     }
+    
+    static fromObject(object) {
+        return new CreateProjectRequest(
+            object.number,
+            object.name,
+            object.beneficiaryName,
+            object.beneficiaryAddress,
+            object.beneficiaryPhone,
+            object.beneficiaryEmail,
+            object.drafterName,
+            object.drafterAddress,
+            object.drafterPhone,
+            object.drafterEmail,
+            object.createdAt
+        );
+    }
 }
 
 export default CreateProjectRequest;

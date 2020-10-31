@@ -7,7 +7,9 @@
 <script>
   import CreateProjectForm from "~/Infrastructure/UI/Vue/components/CreateProjectForm";
   import CreateProjectRequest from "~/Interface/Request/CreateProjectRequest";
-  
+  import 'bootstrap'
+  import 'bootstrap/dist/css/bootstrap.min.css'
+
   export default {
     name: 'app',
     components: {
@@ -31,5 +33,6 @@
     text-align: center;
     color: #2c3e50;
     margin-top: 60px;
+    overflow: hidden;
   }
 </style>

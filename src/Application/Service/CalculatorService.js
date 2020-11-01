@@ -26,15 +26,18 @@ class CalculatorService {
             calculateCommand.verticalElectrodeDiameter,
             calculateCommand.verticalElectrodeLength,
             calculateCommand.verticalElectrodeDepth,
-            calculateCommand.soilType,
+            this.calculatorRepository.getSoilResistivityBySoilType(calculateCommand.soilType),
             calculateCommand.numberOfVerticalElectrodes,
             calculateCommand.distanceBetweenVerticalElectrodesL,
             calculateCommand.verticalElectrodesPlacement,
+            this.calculatorRepository.getVerticalGroundingUtilisationFactor(calculateCommand.distanceBetweenVerticalElectrodesL, calculateCommand.verticalElectrodesPlacement, calculateCommand.numberOfVerticalElectrodes),
+            this.calculatorRepository.getHorizontalGroundingUtilisationFactor(calculateCommand.distanceBetweenVerticalElectrodesL, calculateCommand.verticalElectrodesPlacement, calculateCommand.numberOfVerticalElectrodes),
             calculateCommand.strapLength,
             calculateCommand.strapWidth,
             calculateCommand.numberOfHorizontalGrounding,
             calculateCommand.groundDispersionResistance,
         );
+        
         
         const calculatorResult = calculator.calculate();
         

@@ -21,6 +21,23 @@ class CalculateResponse {
         
         return response;
     }
+
+    /**
+     * @param {int} statusCode
+     * @param {Object} payload
+     * @param {string} message
+     * @returns {CalculateResponse}
+     */
+    static error(statusCode, payload, message) {
+        const response = new CalculateResponse();
+        
+        response.statusCode = statusCode;
+        response.isSuccess = false;
+        response.payload = payload;
+        response.message = message;
+        
+        return response;
+    }
 }
 
 export default CalculateResponse;

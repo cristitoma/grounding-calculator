@@ -31,13 +31,6 @@
                         </button>
                     </div>
                 </div>
-                <div class="row mb-5">
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                        <button type="button" class="btn btn-info" @click="showRaport">
-                            <span class="text-uppercase">Vizualizeaza raport</span>
-                        </button>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pr-lg-5 pr-xl-5">
                         <div class="alert alert-danger" role="alert">
@@ -54,9 +47,10 @@
 </template>
 
 <script>
-    import Type from '../../../../Interface/Request/typeInputHelper'
-    import GroundingCalculator from "../../../GroundingCalculator";
     import CreateProjectRequest from "../../../../Interface/Request/CreateProjectRequest";
+    import GroundingCalculator from "../../../GroundingCalculator";
+    import Type from '../../../../Interface/Request/typeInputHelper';
+
     export default {
         name: "create-project-form",
         props: {
@@ -68,7 +62,8 @@
             },
 
             groundingCalculatorResponse () {
-                const createProjectResponse = new GroundingCalculator.getProjectController().create(
+                const app = new GroundingCalculator();
+                const createProjectResponse = app.getProjectController().create(
                     new CreateProjectRequest(
                         1,
                         'Project Name',
@@ -83,7 +78,8 @@
                         '2020-10-23',
                     )
                 );
-                console.log(createProjectResponse)
+
+                if (createProjectResponse.isSuccess) this.$router.push({name: 'CalculatorForm'})
             },
 
             showRaport () {

@@ -8,14 +8,13 @@ export default new Router({
     routes: [
         {
             path: '/',
-            name: 'CalculatorForm',
-            component: CalculatorForm,
-            props: {},
-        },
-        {
-            path: '/create-project',
             name: 'CreateProjectForm',
             component: CreateProjectForm,
+        },
+        {
+            path: '/calculator',
+            name: 'CalculatorForm',
+            component: CalculatorForm,
         },
     ],
 })

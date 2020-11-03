@@ -33,17 +33,17 @@ test('Calculate', () => {
     const calculatorResponse = app.getCalculatorController().calculate(
         new CalculateRequest(
             1,
-            1,
-            2,
-            3,
+            10,
+            50,
+            20,
             4,
             5,
-            6,
-            7,
-            8,
+            1,
+            1,
+            100,
             9,
             10,
-            11,
+            10,
         )
     );
     console.log(calculatorResponse);

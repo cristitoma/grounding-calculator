@@ -16,9 +16,14 @@ class CalculatorController {
     calculate(calculateRequest) {
         calculateRequest.isValid();
         
-        const calculatorResultDto = this.calculatorService.calculate(calculateRequest);
-        
-        return new CalculateResponse.success(200, calculatorResultDto);
+        try {
+            const calculatorResultDto = this.calculatorService.calculate(calculateRequest);
+            
+            return new CalculateResponse.success(200, calculatorResultDto);
+        } catch (e) {
+
+            return new CalculateResponse.error(400, {}, e.message);
+        }
     }
 }
 

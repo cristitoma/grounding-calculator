@@ -53,8 +53,8 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-6 pl-4 pl-sm-5">
+        <div class="row justify-content-between mb-5">
+         <!--   <div class="col-6 pl-4 pl-sm-5">
                 <div class="alert alert-warning" role="alert">
                     <p class="text-uppercase text-danger text-left">Atentie!</p>
                     <p class="text-uppercase text-danger text-left">Se vor completa ca date de intrare numai rubricile galbene apoi se apasa butonul
@@ -67,18 +67,16 @@
                         calculata din relatia: d = (2*b) / &pi;
                     </p>
                 </div>
+            </div>-->
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                <button type="button" class="btn btn-lg btn-primary" @click="calculate">
+                    <span class="text-uppercase">Calcul</span>
+                </button>
             </div>
-            <div class="flex flex-column row">
-                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                    <button type="button" class="btn btn-lg btn-primary" @click="calculate">
-                        <span class="text-uppercase">Calcul</span>
-                    </button>
-                </div>
-                <div v-if="showRaport" class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                    <button type="button" class="btn btn-lg btn-info">
-                        <span class="text-uppercase">Vizualizare raport</span>
-                    </button>
-                </div>
+            <div v-if="showRaport" class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                <button type="button" class="btn btn-lg btn-info">
+                    <span class="text-uppercase">Vizualizare raport</span>
+                </button>
             </div>
         </div>
     </div>

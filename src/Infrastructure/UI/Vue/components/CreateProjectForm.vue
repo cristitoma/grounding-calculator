@@ -8,8 +8,16 @@
                 <div class="col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9">
                     <div v-for="(field, fieldName) in fields" class="form-group row" :key="fieldName">
                         <div class="col-12 col-sm-3 col-md-4 col-lg-4 col-xl-3 text-left pl-4 pl-sm-5">
-                            <label :for="fieldName">
-                                {{ field.label }}:
+                            <label :for="fieldName" :hidden="field.isHidden">
+                                {{ field.label }} <span v-if="field.isRequired" style="color:red;"> * </span> :
+                                <span v-if="field.tooltip && !field.isHidden"
+                                      data-toggle="tooltip"
+                                      data-placement="bottom"
+                                      :title="field.tooltip">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                    </svg>
+                                </span>
                             </label>
                         </div>
                         <div class="col-12 col-sm-8 col-md-7 col-lg-8 col-xl-8 pl-4 pr-4 pl-sm-1 pr-sm-1">

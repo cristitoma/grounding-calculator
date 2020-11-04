@@ -41,20 +41,27 @@
                 </div>
             </div>
         </div>
-        <div class="row mb-1">
+        <div class="row mb-3">
             <div class="col-12 col-sm-3 col-md-4 col-lg-4 col-xl-3 text-left pl-4 pl-sm-5">
                 <button type="button" class="btn btn-primary" @click="calculate()">
                     <span class="text-uppercase">Calculeaza</span>
                 </button>
-                <button v-if="showReport" type="button" style="margin-left: 20px;" class="btn btn-info">
-                    <span class="text-uppercase">Vizualizare raport</span>
-                </button>
             </div>
         </div>
         
-        <div class="row mb-3 pl-5">
-            <div class="col-lg-8 text-center">
-                <hr class="text-center"/>
+        <div class="row mb-3" v-if="calculatorResponse !== null && calculatorResponse.isSuccess == true">
+            <div class="col-8 text-left pl-4 pl-sm-5">
+                <hr class=""/>
+                
+                <div v-for="(field, fieldName) in calculatorResponse.payload.result" class="" :key="fieldName">
+                    <label>{{field.label}}:</label><span> {{field.value}}</span><span> {{field.unit}}</span>
+                </div>
+                
+                <br>
+                
+                <button type="button" class="btn btn-info">
+                    <span class="text-uppercase">Vizualizare raport</span>
+                </button>
             </div>
         </div>
     </div>
@@ -82,19 +89,14 @@
             }
         },
         data: () => ({
-           showReport: false
+           calculatorResponse: null,
         }),
         methods: {
             calculate () {
                 this.request.projectId = parseInt(window.sessionStorage.getItem('projectId'));
-                const calculatorResponse = GroundingCalculator.getCalculatorController().calculate(
+                this.calculatorResponse = GroundingCalculator.getCalculatorController().calculate(
                     CalculateRequest.fromObject(this.request)
                 );
-
-                console.log(calculatorResponse);
-                if (calculatorResponse.isSuccess) {
-                    this.showReport = true;
-                }
             }
         }
     }

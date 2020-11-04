@@ -8,9 +8,10 @@
                 <div class="col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9">
                     <div v-for="(field, fieldName) in fields" class="form-group row" :key="fieldName">
                         <div class="col-12 col-sm-3 col-md-4 col-lg-4 col-xl-4 text-left pl-4 pl-sm-5">
-                            <label :for="fieldName">
-                                {{ field.label }}<span v-if="field.unit"> ({{ field.unit }})</span><span v-if="field.isRequired" style="color:red;"> *</span>:
-                                <span v-if="field.tooltip && !field.isHidden"
+                            <label :for="fieldName" :hidden="field.isHidden">
+                                {{ field.label }}
+                                <span v-if="field.unit"> ({{ field.unit }})</span><span v-if="field.isRequired" style="color:red;"> * </span> :
+                                <span v-if="field.tooltip"
                                       data-toggle="tooltip"
                                       data-placement="bottom"
                                       :title="field.tooltip">

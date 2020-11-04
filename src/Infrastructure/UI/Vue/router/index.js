@@ -1,10 +1,10 @@
-import Router from 'vue-router'
+import VueRouter from 'vue-router'
 import CalculatorForm from '../components/CalculatorForm'
 import CreateProjectForm from "../components/CreateProjectForm";
 import Vue from 'vue'
 
-Vue.use(Router);
-export default new Router({
+Vue.use(VueRouter);
+export default new VueRouter({
     routes: [
         {
             path: '/',

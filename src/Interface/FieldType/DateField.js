@@ -10,6 +10,8 @@ class DateField extends AbstractField {
         isHidden: false,
     };
 
+    inputType = 'date';
+    
     constructor(options = {}) {
         super();
         options = {...this.defaultOptions, ...options};

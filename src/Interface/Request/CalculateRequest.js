@@ -47,7 +47,8 @@ class CalculateRequest extends Calculate {
                     12: 'Nisip, nisip cu pietris',
                     13: 'Roci, bazalturi',
                     14: 'Stânca compacta',
-                }
+                },
+                defaultValue: '',
             }),
             numberOfVerticalElectrodes: new NumericField({
                 isRequired: true,
@@ -60,7 +61,8 @@ class CalculateRequest extends Calculate {
                     1: 'e = l',
                     2: 'e = 2.l',
                     3: 'e = 3.l',
-                }
+                },
+                defaultValue: '',
             }),
             verticalElectrodesPlacement: new SelectField({
                 isRequired: true,
@@ -68,7 +70,8 @@ class CalculateRequest extends Calculate {
                 list: {
                     1: 'liniar',
                     2: 'pe contur',
-                }
+                },
+                defaultValue: '',
             }),
             strapLength: new NumericField({
                 isRequired: true,
@@ -86,12 +89,13 @@ class CalculateRequest extends Calculate {
             }),
             groundDispersionResistance: new SelectField({
             isRequired: true,
-                label: 'Valoarea maxima a rezistentei de dispersie',
+                label: 'Val. max. a rezistentei de dispersie',
                 list: {
                     1: '1 - Priza comuna cu paratrasnetul',
                     4: '4 - Priza simpla',
                     10: '10 - Priza de paratrasnet',
-                }
+                },
+                defaultValue: '',
             }),
         }
     }

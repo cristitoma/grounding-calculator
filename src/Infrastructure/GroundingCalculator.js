@@ -20,4 +20,4 @@ class GroundingCalculator {
     }
 }
 
-export default GroundingCalculator;
+export default new GroundingCalculator();

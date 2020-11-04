@@ -1,11 +1,11 @@
 <template>
     <div>
-        <div class="row">
+        <div class="row mb-3">
             <div class="col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9">
-                <div v-for="(field, fieldName) in calculatorFields" class="form-group row" :key="fieldName">
+                <div v-for="(field, fieldName) in fields" class="form-group row" :key="fieldName">
                     <div class="col-12 col-sm-3 col-md-4 col-lg-4 col-xl-3 text-left pl-4 pl-sm-5">
                         <label :for="fieldName" :hidden="field.isHidden">
-                            {{ field.label }}
+                            {{ field.label }}<span v-if="field.unit"> ({{ field.unit }})</span><span v-if="field.isRequired" style="color:red;"> *</span>:
                             <span v-if="field.tooltip && !field.isHidden"
                                   data-toggle="tooltip"
                                   data-placement="bottom"
@@ -14,69 +14,47 @@
                                     <path fill-rule="evenodd" d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
                                 </svg>
                             </span>
-                            <span>
-                                :
-                            </span>
                         </label>
                     </div>
                     <div class="col-12 col-sm-8 col-md-7 col-lg-7 col-xl-8 pl-4 pr-4 pl-sm-1 pr-sm-1">
                         <input v-if="field.constructor.name !== 'SelectField'"
-                               v-model="field.defaultValue"
-                               :type="inputType(field.constructor.name)"
+                               v-model="request[fieldName]"
+                               :type="field.inputType"
                                :name="fieldName"
                                :id="fieldName"
                                class="form-control"
                                :readonly="field.isReadOnly"
-                               :aria-describedby="fieldName+'-help'"
                                :placeholder="field.placeholder"
                                :hidden="field.isHidden"/>
-                        <select v-if="field.constructor.name === 'SelectField'" class="form-control">
+                        <select v-model="request[fieldName]" v-if="field.constructor.name === 'SelectField'" class="form-control">
+                            <option value=''>{{field.placeholder}}</option>
                             <option v-for="(option, key) in field.list" :key="key"
-                                    v-model="field.defaultValue"
                                     :name="fieldName"
                                     :id="fieldName"
+                                    :value="key"
                                     :readonly="field.isReadOnly"
-                                    :aria-describedby="fieldName+'-help'"
                                     :placeholder="field.placeholder">
                                 {{option}}
                             </option>
                         </select>
-                        <small :id="fieldName+'-help'"
-                               class="form-text text-muted text-left"
-                               :hidden="field.isHidden">
-                            This field is mandatory.
-                        </small>
-                    </div>
-                    <div class="col-12 col-sm-1 col-md-1 col-lg-1 col-xl-1">
-                        {{ field.unit }}
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row justify-content-between mb-5">
-         <!--   <div class="col-6 pl-4 pl-sm-5">
-                <div class="alert alert-warning" role="alert">
-                    <p class="text-uppercase text-danger text-left">Atentie!</p>
-                    <p class="text-uppercase text-danger text-left">Se vor completa ca date de intrare numai rubricile galbene apoi se apasa butonul
-                        "Calcul".
-                    </p>
-                    <p class="text-uppercase text-danger text-left">***Info!</p>
-                    <p class="text-uppercase text-danger text-left">In mod obisnuit priza orizontala este realizate cu bare cu sectiune rectangulara,
-                        cu latimea (b) de 30...40cm si grosimea (c) de 4...5 mm. In caz, valoarea
-                        <span class="bg-primary px-2 text-white">efectiva a diametrului echivalent "d" poate fi</span>
-                        calculata din relatia: d = (2*b) / &pi;
-                    </p>
-                </div>
-            </div>-->
-            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                <button type="button" class="btn btn-lg btn-primary" @click="calculate">
-                    <span class="text-uppercase">Calcul</span>
+        <div class="row mb-1">
+            <div class="col-12 col-sm-3 col-md-4 col-lg-4 col-xl-3 text-left pl-4 pl-sm-5">
+                <button type="button" class="btn btn-primary" @click="calculate()">
+                    <span class="text-uppercase">Calculeaza</span>
                 </button>
-            </div>
-            <div v-if="showRaport" class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                <button type="button" class="btn btn-lg btn-info">
+                <button v-if="showReport" type="button" style="margin-left: 20px;" class="btn btn-info">
                     <span class="text-uppercase">Vizualizare raport</span>
                 </button>
+            </div>
+        </div>
+        
+        <div class="row mb-3 pl-5">
+            <div class="col-lg-8 text-center">
+                <hr class="text-center"/>
             </div>
         </div>
     </div>
@@ -85,45 +63,48 @@
 <script>
     import CalculateRequest from "../../../../Interface/Request/CalculateRequest";
     import GroundingCalculator from "../../../GroundingCalculator";
-    import Type from '../../../../Interface/Request/typeInputHelper'
+    
     export default {
         name: "CalculatorForm",
-        props: {
-            calculatorFields: {},
+        computed: {
+            fields: () => {
+                return CalculateRequest.getFieldsType();
+            },
+            request: () => {
+                const request = {};
+                const fields = CalculateRequest.getFieldsType();
+
+                Object.keys(fields).forEach((fieldName) => {
+                    request[fieldName] = fields[fieldName].defaultValue;
+                });
+                
+                return request;
+            }
         },
         data: () => ({
-           showRaport: false
+           showReport: false
         }),
         methods: {
-            inputType (type) {
-                return Type.prototype.inputType(type)
-            },
-
             calculate () {
-                const app = new GroundingCalculator();
-                const calculatorResponse = app.getCalculatorController().calculate(
-                    new CalculateRequest(
-                        1,
-                        10,
-                        50,
-                        20,
-                        4,
-                        5,
-                        1,
-                        1,
-                        100,
-                        9,
-                        10,
-                        10,
-                    )
+                this.request.projectId = parseInt(window.sessionStorage.getItem('projectId'));
+                const calculatorResponse = GroundingCalculator.getCalculatorController().calculate(
+                    CalculateRequest.fromObject(this.request)
                 );
+
                 console.log(calculatorResponse);
-                if (calculatorResponse.isSuccess) this.showRaport = true;
+                if (calculatorResponse.isSuccess) {
+                    this.showReport = true;
+                }
             }
         }
     }
 </script>
 
 <style scoped>
-
+    hr {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      border: 0;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
 </style>

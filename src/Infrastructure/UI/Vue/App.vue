@@ -1,16 +1,11 @@
 <template>
   <div class="app">
-    <router-view :fields="getFields()" :calculator-fields="getCalculatorFields()"/>
+    <router-view/>
   </div>
 </template>
 
 <script>
-  import CalculateRequest from "../../../Interface/Request/CalculateRequest";
-  import CreateProjectForm from "~/Infrastructure/UI/Vue/components/CreateProjectForm";
-  import CreateProjectRequest from "~/Interface/Request/CreateProjectRequest";
   import 'bootstrap';
-  import 'bootstrap/dist/css/bootstrap.min.css';
-  import CalculatorForm from "./components/CalculatorForm";
   import router from './router';
   import Vue from 'vue';
   import VueRouter from 'vue-router';
@@ -19,21 +14,7 @@
 
   export default {
     name: 'app',
-    components: {
-      CalculatorForm,
-      CreateProjectForm,
-      router
-    },
-    methods: {
-      getFields() {
-        const fields = CreateProjectRequest.getFieldsType();
-        return fields;
-      },
-      getCalculatorFields() {
-        const fields = CalculateRequest.getFieldsType();
-        return fields;
-      }
-    }
+    router,
   }
 </script>
 
@@ -47,4 +28,6 @@
     margin-top: 60px;
     overflow: hidden;
   }
+  
+  @import '~bootstrap/dist/css/bootstrap.min.css';
 </style>

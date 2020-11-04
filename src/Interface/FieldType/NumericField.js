@@ -14,6 +14,8 @@ class NumericField extends AbstractField {
         unit: null,
     };
     
+    inputType = 'number';
+    
     constructor(options = {}) {
         super();
         options = {...this.defaultOptions, ...options};

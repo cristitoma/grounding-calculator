@@ -13,6 +13,8 @@ class StringField extends AbstractField {
         isHidden: false,
     };
     
+    inputType = 'text';
+    
     constructor(options = {}) {
         super();
         options = {...this.defaultOptions, ...options};

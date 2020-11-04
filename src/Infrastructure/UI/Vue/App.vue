@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div class="app container-fluid">
     <router-view :fields="getFields()" :calculator-fields="getCalculatorFields()"/>
   </div>
 </template>
@@ -46,5 +46,8 @@
     color: #2c3e50;
     margin-top: 60px;
     overflow: hidden;
+  }
+  .app.container-fluid {
+    max-width: 1400px;
   }
 </style>

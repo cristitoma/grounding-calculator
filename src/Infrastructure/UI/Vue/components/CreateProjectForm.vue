@@ -4,10 +4,10 @@
             Create project
         </div>
         <div class="card-body">
-            <div class="row justify-content-center">
-                <div class="col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div v-for="(field, fieldName) in fields" class="form-group row" :key="fieldName">
-                        <div class="col-12 col-sm-3 col-md-4 col-lg-4 col-xl-3 text-left pl-4 pl-sm-5">
+                        <div class="col-12 col-sm-4 col-md-3 col-lg-3 col-xl-3 text-left pl-4">
                             <label :for="fieldName" :hidden="field.isHidden">
                                 {{ field.label }} <span v-if="field.isRequired" style="color:red;"> * </span> :
                                 <span v-if="field.tooltip && !field.isHidden"
@@ -20,7 +20,7 @@
                                 </span>
                             </label>
                         </div>
-                        <div class="col-12 col-sm-8 col-md-7 col-lg-8 col-xl-8 pl-4 pr-4 pl-sm-1 pr-sm-1">
+                        <div class="col-12 col-sm-8 col-md-9 col-lg-9 col-xl-9 pl-4 pr-4">
                             <input v-model="request[fieldName]"
                                    :type="field.inputType"
                                    :name="fieldName"
@@ -32,9 +32,9 @@
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center mb-5">
-                <div class="col-12 pl-4 pl-sm-5">
-                    <button type="button" class="btn btn-primary" @click="groundingCalculatorResponse()">
+            <div class="row mb-5">
+                <div class="col-12 pl-4">
+                    <button type="button" class="btn btn-primary float-left" @click="groundingCalculatorResponse()">
                         <span class="text-uppercase">Next</span>
                     </button>
                 </div>

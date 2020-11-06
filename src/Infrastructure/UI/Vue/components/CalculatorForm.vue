@@ -4,10 +4,10 @@
             Calculator
         </div>
         <div class="card-body">
-            <div class="row justify-content-center mb-3">
-                <div class="col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9">
+            <div class="row mb-3">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div v-for="(field, fieldName) in fields" class="form-group row" :key="fieldName">
-                        <div class="col-12 col-sm-3 col-md-4 col-lg-4 col-xl-4 text-left pl-4 pl-sm-5">
+                        <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 pl-4 text-left">
                             <label :for="fieldName" :hidden="field.isHidden">
                                 {{ field.label }}
                                 <span v-if="field.unit"> ({{ field.unit }})</span><span v-if="field.isRequired" style="color:red;"> * </span> :
@@ -21,7 +21,7 @@
                                 </span>
                             </label>
                         </div>
-                        <div class="col-12 col-sm-8 col-md-7 col-lg-7 col-xl-7 pl-4 pr-4 pl-sm-1 pr-sm-1">
+                        <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 pr-4">
                             <input v-if="field.constructor.name !== 'SelectField'"
                                    v-model="request[fieldName]"
                                    :type="field.inputType"
@@ -46,16 +46,16 @@
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center mb-3">
-                <div class="col-12 col-sm-3 col-md-4 col-lg-4 col-xl-3 text-left pl-4 pl-sm-5">
+            <div class="row mb-3">
+                <div class="col-12 col-sm-3 col-md-4 col-lg-4 col-xl-3 text-left pl-4">
                     <button type="button" class="btn btn-primary" @click="calculate()">
                         <span class="text-uppercase">Calculeaza</span>
                     </button>
                 </div>
             </div>
 
-            <div class="row justify-content-center mb-3" v-if="calculatorResponse !== null && calculatorResponse.isSuccess == true">
-                <div class="col-8 text-left pl-4 pl-sm-5">
+            <div class="row mb-3" v-if="calculatorResponse !== null && calculatorResponse.isSuccess == true">
+                <div class="col-8 text-left pl-4">
                     <hr class=""/>
 
                     <div v-for="(field, fieldName) in calculatorResponse.payload.result" class="" :key="fieldName">

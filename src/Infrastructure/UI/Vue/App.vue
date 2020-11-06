@@ -29,7 +29,7 @@
     overflow: hidden;
   }
   .app.container-fluid {
-    max-width: 1400px;
+    max-width: 800px;
   }
 
   @import '~bootstrap/dist/css/bootstrap.min.css';

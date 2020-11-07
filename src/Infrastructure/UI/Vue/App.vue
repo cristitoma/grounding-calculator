@@ -27,6 +27,7 @@
     color: #2c3e50;
     margin-top: 60px;
     overflow: hidden;
+    margin-bottom: 60px;
   }
   .app.container-fluid {
     max-width: 800px;

@@ -14,7 +14,10 @@ class CalculatorController {
      * @returns {CalculateResponse}
      */
     calculate(calculateRequest) {
-        calculateRequest.isValid();
+        const invalidFields = calculateRequest.isValid();
+        if (Object.keys(invalidFields).length > 0) {
+            return new CalculateResponse.error(400, {fields: invalidFields}, 'Please check invalid fields.');
+        }
         
         try {
             const calculatorResultDto = this.calculatorService.calculate(calculateRequest);

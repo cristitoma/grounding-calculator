@@ -32,7 +32,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row mb-5">
+            <div class="row mb-4">
                 <div class="col-12 pl-4">
                     <button type="button" class="btn btn-primary float-left" @click="groundingCalculatorResponse()">
                         <span class="text-uppercase">Next</span>

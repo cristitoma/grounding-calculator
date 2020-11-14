@@ -1,16 +1,25 @@
 <template>
     <div class="card">
-        <div class="card-header">
+        <div class="calculator-form card-header">
             Calculator
         </div>
         <div class="card-body">
             <div class="row mb-3">
+                <div 
+                    v-if="calculatorResponse.message !== ''" 
+                    :class="'col-11 col-sm-11 col-md-11 col-lg-11 col-xl-11 alert ' + (calculatorResponse.isSuccess ? 'alert-primary' : 'alert-danger')" 
+                    style="margin: 0 auto;"
+                    role="alert"
+                >
+                  {{calculatorResponse.message}}
+                </div>
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div v-for="(field, fieldName) in fields" class="form-group row" :key="fieldName">
                         <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 pl-4 text-left">
                             <label :for="fieldName" :hidden="field.isHidden">
                                 {{ field.label }}
-                                <span v-if="field.unit"> ({{ field.unit }})</span><span v-if="field.isRequired" style="color:red;"> * </span> :
+                                <span v-if="field.unit"> ({{ field.unit }})</span>
+                                <span v-if="field.isRequired" style="color:red;"> * </span> :
                                 <span v-if="field.tooltip"
                                       data-toggle="tooltip"
                                       data-placement="bottom"
@@ -27,11 +36,15 @@
                                    :type="field.inputType"
                                    :name="fieldName"
                                    :id="fieldName"
-                                   class="form-control"
+                                   :class="'form-control ' + (calculatorResponse.isSuccess === false && typeof(calculatorResponse.payload.fields[fieldName]) !== 'undefined' ? 'is-invalid' : '')"
                                    :readonly="field.isReadOnly"
                                    :placeholder="field.placeholder"
                                    :hidden="field.isHidden"/>
-                            <select v-model="request[fieldName]" v-if="field.constructor.name === 'SelectField'" class="form-control">
+                            <select 
+                                v-model="request[fieldName]" 
+                                v-if="field.constructor.name === 'SelectField'" 
+                                :class="'form-control ' + (calculatorResponse.isSuccess === false && typeof(calculatorResponse.payload.fields[fieldName]) !== 'undefined' ? 'is-invalid' : '')"
+                            >
                                 <option value=''>{{field.placeholder}}</option>
                                 <option v-for="(option, key) in field.list" :key="key"
                                         :name="fieldName"
@@ -42,6 +55,15 @@
                                     {{option}}
                                 </option>
                             </select>
+                            <div 
+                                v-if="field.isHidden === false && typeof(calculatorResponse.payload.fields[fieldName]) !== 'undefined'" 
+                                class="invalid-feedback" 
+                                style="text-align:left;"
+                            >
+                                <div v-for="(message) in calculatorResponse.payload.fields[fieldName]">
+                                    {{message}}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -54,7 +76,7 @@
                 </div>
             </div>
 
-            <div class="row mb-3" v-if="calculatorResponse !== null && calculatorResponse.isSuccess == true">
+            <div class="row mb-3" v-if="calculatorResponse.isSuccess == true">
                 <div class="col-8 text-left pl-4">
                     <hr class=""/>
 
@@ -95,7 +117,14 @@
             }
         },
         data: () => ({
-           calculatorResponse: null,
+           calculatorResponse: {
+                isSuccess: null,
+                message: '',
+                payload: {
+                    fields: {}
+                }
+           },
+           
         }),
         methods: {
             calculate () {
@@ -103,7 +132,17 @@
                 this.calculatorResponse = GroundingCalculator.getCalculatorController().calculate(
                     CalculateRequest.fromObject(this.request)
                 );
-            }
+                
+                if (this.calculatorResponse.isSuccess === false) {
+                    const el = this.$el.getElementsByClassName('calculator-form')[0];
+                    
+                    if (el) {
+                      el.scrollIntoView({behavior: "smooth", block: "end"});
+                    }
+                }
+                
+                console.log(this.calculatorResponse);
+            },
         }
     }
 </script>

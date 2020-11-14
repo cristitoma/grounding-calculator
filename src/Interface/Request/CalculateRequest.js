@@ -4,7 +4,15 @@ import SelectField from "~/Interface/FieldType/SelectField";
 
 class CalculateRequest extends Calculate {
     isValid() {
-        return true;
+        let invalidFields = {};
+        for (const [key, fieldType] of Object.entries(CalculateRequest.getFieldsType())) {
+            const violations = fieldType.isValid(this[key]);
+            if (violations.length > 0) {
+                invalidFields[key] = violations;
+            }
+        }
+        
+        return invalidFields;
     }
     
     static getFieldsType() {

@@ -4,8 +4,9 @@
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --dest ./build/app && php -S localhost:8000 -t ./build/app",
-    "build-component": "vue-cli-service build --dest ./build/web-component --target wc --name grounding-calculator ./src/Infrastructure/UI/Vue/App.vue",
+    "serve:app": "php -S localhost:8000 -t ./build/app",
+    "build:app": "vue-cli-service build --dest ./build/app",
+    "build:component": "vue-cli-service build --dest ./build/web-component --target wc --name grounding-calculator ./src/Infrastructure/UI/Vue/App.vue",
     "test": "jest"
   },
   "dependencies": {

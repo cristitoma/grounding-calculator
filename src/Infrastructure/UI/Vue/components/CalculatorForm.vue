@@ -56,7 +56,7 @@
                                 </option>
                             </select>
                             <div 
-                                v-if="field.isHidden === false && typeof(calculatorResponse.payload.fields[fieldName]) !== 'undefined'" 
+                                v-if="field.isHidden === false && calculatorResponse.isSuccess === false && typeof(calculatorResponse.payload.fields[fieldName]) !== 'undefined'" 
                                 class="invalid-feedback" 
                                 style="text-align:left;"
                             >
@@ -140,8 +140,6 @@
                       el.scrollIntoView({behavior: "smooth", block: "end"});
                     }
                 }
-                
-                console.log(this.calculatorResponse);
             },
         }
     }

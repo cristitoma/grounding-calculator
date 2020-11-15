@@ -77,11 +77,13 @@
             </div>
 
             <div class="row mb-3" v-if="calculatorResponse.isSuccess == true">
-                <div class="col-8 text-left pl-4">
+                <div class="col-12 text-left pl-4">
                     <hr class=""/>
 
                     <div v-for="(field, fieldName) in calculatorResponse.payload.result" class="" :key="fieldName">
-                        <label>{{field.label}}:</label><span> {{field.value}}</span><span> {{field.unit}}</span>
+                        <label style="max-width: 50%">{{field.label}}:</label>
+                        <span style="vertical-align: top"> {{field.value}}</span>
+                        <span style="vertical-align: top"> {{field.unit}}</span>
                     </div>
 
                     <br>

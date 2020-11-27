@@ -36,14 +36,14 @@
                                    :type="field.inputType"
                                    :name="fieldName"
                                    :id="fieldName"
-                                   :class="'form-control ' + (calculatorResponse.isSuccess === false && typeof(calculatorResponse.payload.fields[fieldName]) !== 'undefined' ? 'is-invalid' : '')"
+                                   :class="'form-control ' + (calculatorResponse.isSuccess === false && typeof(calculatorResponse.payload.fields) !== 'undefined' && typeof(calculatorResponse.payload.fields[fieldName]) !== 'undefined' ? 'is-invalid' : '')"
                                    :readonly="field.isReadOnly"
                                    :placeholder="field.placeholder"
                                    :hidden="field.isHidden"/>
                             <select 
                                 v-model="request[fieldName]" 
                                 v-if="field.constructor.name === 'SelectField'" 
-                                :class="'form-control ' + (calculatorResponse.isSuccess === false && typeof(calculatorResponse.payload.fields[fieldName]) !== 'undefined' ? 'is-invalid' : '')"
+                                :class="'form-control ' + (calculatorResponse.isSuccess === false && typeof(calculatorResponse.payload.fields) !== 'undefined' && typeof(calculatorResponse.payload.fields[fieldName]) !== 'undefined' ? 'is-invalid' : '')"
                             >
                                 <option value=''>{{field.placeholder}}</option>
                                 <option v-for="(option, key) in field.list" :key="key"
@@ -56,7 +56,10 @@
                                 </option>
                             </select>
                             <div 
-                                v-if="field.isHidden === false && calculatorResponse.isSuccess === false && typeof(calculatorResponse.payload.fields[fieldName]) !== 'undefined'" 
+                                v-if="field.isHidden === false 
+                                    && calculatorResponse.isSuccess === false 
+                                    && typeof(calculatorResponse.payload.fields) !== 'undefined'
+                                    && typeof(calculatorResponse.payload.fields[fieldName]) !== 'undefined'" 
                                 class="invalid-feedback" 
                                 style="text-align:left;"
                             >

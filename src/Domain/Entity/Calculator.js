@@ -53,28 +53,29 @@ class Calculator {
     calculateVerticalElectrodeDispersionResistance() {
         const h = this.verticalElectrodeDepth + this.verticalElectrodeLength / 2;
 
-        return 0.366
+        return (0.366
             * this.soilResistivity 
             * (Math.log(2 * this.verticalElectrodeLength / this.verticalElectrodeDiameter) / Math.log(10)
             + 0.5 * Math.log((4 * h + this.verticalElectrodeLength) / (4 * h - this.verticalElectrodeLength)) / Math.log(10)) 
-            / this.verticalElectrodeLength
+            / this.verticalElectrodeLength)
+            || 0
         ;
     }
     
     calculateDistanceBetweenVerticalElectrodesCM() {
-        return this.distanceBetweenVerticalElectrodesL * this.verticalElectrodeLength;
+        return (this.distanceBetweenVerticalElectrodesL * this.verticalElectrodeLength) || 0;
     }
     
     calculateVerticalGroundingResistance() {
-        return this.calculateVerticalElectrodeDispersionResistance() / (this.numberOfVerticalElectrodes * this.verticalGroundingUF);
+        return (this.calculateVerticalElectrodeDispersionResistance() / (this.numberOfVerticalElectrodes * this.verticalGroundingUF)) || 0;
     }
     
     calculateHorizontalElectrodeDispersionResistance() {
-        return 0.366 * this.soilResistivity * (Math.log(2 * Math.pow(this.strapLength, 2) / (this.strapWidth * this.verticalElectrodeDepth)) / Math.log(10)) / this.strapLength
+        return (0.366 * this.soilResistivity * (Math.log(2 * Math.pow(this.strapLength, 2) / (this.strapWidth * this.verticalElectrodeDepth)) / Math.log(10)) / this.strapLength) || 0
     }
     
     calculateHorizontalGroundingResistance() {
-        return this.calculateHorizontalElectrodeDispersionResistance() / (this.numberOfHorizontalGrounding * this.horizontalGroundingUF);
+        return (this.calculateHorizontalElectrodeDispersionResistance() / (this.numberOfHorizontalGrounding * this.horizontalGroundingUF)) || 0;
     }
     
     calculateMultipleGroundingResistance() {
@@ -84,7 +85,7 @@ class Calculator {
             throw new CalculateException("Ai depasit valoarea maxima a rezistentei de dispersie a prizei de pamant Rp! Mareste numarul de electrozi verticali si/sau lungimea platbandei si, eventual, distanta dintre electrozi!");
         }
         
-        return multipleGroundingResistance;
+        return multipleGroundingResistance || 0;
     }
     
     getId() {

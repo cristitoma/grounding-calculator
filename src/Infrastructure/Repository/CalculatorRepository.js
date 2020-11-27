@@ -1,4 +1,5 @@
 import AbstractProjectRepository from "~/Application/Repository/AbstractProjectRepository";
+import CalculateException from "~/Domain/Exception/CalculateException";
 
 class CalculatorRepository extends AbstractProjectRepository {
     prefix = 'calculator_';
@@ -126,11 +127,23 @@ class CalculatorRepository extends AbstractProjectRepository {
     }
     
     getVerticalGroundingUtilisationFactor(distanceBetweenVerticalElectrodesL, verticalElectrodesPlacement, numberOfVerticalElectrodes) {
-        return this.verticalGroundingUtilisationFactor[distanceBetweenVerticalElectrodesL][verticalElectrodesPlacement][numberOfVerticalElectrodes];
+        let element = this.verticalGroundingUtilisationFactor[distanceBetweenVerticalElectrodesL][verticalElectrodesPlacement][numberOfVerticalElectrodes];
+        if (typeof element === 'undefined') {
+            console.log('Unsupported number of vertical electrodes');
+            throw new CalculateException('Unsupported number of vertical electrodes');
+        }
+        return element;
     }
     
     getHorizontalGroundingUtilisationFactor(distanceBetweenVerticalElectrodesL, verticalElectrodesPlacement, numberOfVerticalElectrodes) {
-        return this.horizontalGroundingUtilisationFactor[distanceBetweenVerticalElectrodesL][verticalElectrodesPlacement][numberOfVerticalElectrodes];
+        let element = this.horizontalGroundingUtilisationFactor[distanceBetweenVerticalElectrodesL][verticalElectrodesPlacement][numberOfVerticalElectrodes];
+        
+        if (typeof element === 'undefined') {
+            console.log('Unsupported number of horizontal electrodes');
+            throw new CalculateException('Unsupported number of horizontal electrodes');
+        }
+        
+        return element;
     }
 }
 

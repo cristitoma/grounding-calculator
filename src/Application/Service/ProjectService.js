@@ -43,6 +43,10 @@ class ProjectService {
         
         return project.getId();
     }
+    
+    getById(id) {
+        return this.projectRepository.getById(id);
+    }
 }
 
 export default ProjectService;

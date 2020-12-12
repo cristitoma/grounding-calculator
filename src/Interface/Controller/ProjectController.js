@@ -22,6 +22,10 @@ class ProjectController {
         
         return new CreateProjectResponse.success(200, projectId);
     }
+
+    getById(id) {
+        return this.projectService.getById(id);
+    }
 }
 
 export default ProjectController;

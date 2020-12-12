@@ -18,6 +18,7 @@ class CalculateResponse {
         response.statusCode = statusCode;
         response.isSuccess = true;
         response.payload = {
+            calculatorId: calculatorResultDto.calculatorId,
             result: {
                 soilResistivity: {
                     value: calculatorResultDto.soilResistivity,

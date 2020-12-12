@@ -1,5 +1,24 @@
 <template>
     <div class="card">
+        <div class="pdf-report">
+            <vue-html2pdf
+                :show-layout="false"
+                :float-layout="true"
+                :enable-download="true"
+                :preview-modal="false"
+                filename="report"
+                :pdf-quality="2"
+                :manual-pagination="true"
+                pdf-format="a4"
+                pdf-orientation="portrait"
+                pdf-content-width="800px"
+                ref="html2Pdf"
+            >
+                <section slot="pdf-content" >
+                   <report v-if="reportId !== null" :report-id=reportId></report>
+                </section>
+            </vue-html2pdf>
+        </div>
         <div class="calculator-form card-header">
             Calculator
         </div>
@@ -19,7 +38,7 @@
                             <label :for="fieldName" :hidden="field.isHidden">
                                 {{ field.label }}
                                 <span v-if="field.unit"> ({{ field.unit }})</span>
-                                <span v-if="field.isRequired" style="color:red;"> * </span> :
+                                <span v-if="field.isRequired" style="color:red;"> * </span>
                                 <span v-if="field.tooltip"
                                       data-toggle="tooltip"
                                       data-placement="bottom"
@@ -91,7 +110,7 @@
 
                     <br>
 
-                    <button type="button" class="btn btn-info">
+                    <button type="button" class="btn btn-info" @click="downloadReport()">
                         <span class="text-uppercase">Vizualizare raport</span>
                     </button>
                 </div>
@@ -103,8 +122,14 @@
 <script>
     import CalculateRequest from "../../../../Interface/Request/CalculateRequest";
     import GroundingCalculator from "../../../GroundingCalculator";
+    import Report from "~/Infrastructure/UI/Vue/components/Report";
+    import VueHtml2pdf from 'vue-html2pdf'
 
     export default {
+        components: {Report, VueHtml2pdf},
+        props: [
+            'projectId'
+        ],
         name: "CalculatorForm",
         computed: {
             fields: () => {
@@ -129,11 +154,11 @@
                     fields: {}
                 }
            },
-           
+           reportId: null,
         }),
         methods: {
             calculate () {
-                this.request.projectId = parseInt(window.sessionStorage.getItem('projectId'));
+                this.request.projectId = this.projectId;
                 this.calculatorResponse = GroundingCalculator.getCalculatorController().calculate(
                     CalculateRequest.fromObject(this.request)
                 );
@@ -146,7 +171,12 @@
                     }
                 }
             },
-        }
+            downloadReport () {
+                this.reportId = GroundingCalculator.getReportController().create(this.calculatorResponse.payload.calculatorId).payload.reportId;
+                document.body.scrollTop = document.documentElement.scrollTop = 0;
+                setTimeout(() => {this.$refs.html2Pdf.generatePdf();} , 100);
+            }
+        },
     }
 </script>
 

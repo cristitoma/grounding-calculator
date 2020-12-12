@@ -20,6 +20,7 @@ test('CalculatorResult', () => {
             10,
             10,
     );
+    calculator.calculate();
     
-    expect(calculator.calculate().constructor.name).toBe(CalculatorResult.name);
+    expect(calculator.getResult().constructor.name).toBe(CalculatorResult.name);
 });

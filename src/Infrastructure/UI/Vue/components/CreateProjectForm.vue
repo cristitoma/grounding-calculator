@@ -9,7 +9,7 @@
                     <div v-for="(field, fieldName) in fields" class="form-group row" :key="fieldName">
                         <div class="col-12 col-sm-4 col-md-3 col-lg-3 col-xl-3 text-left pl-4">
                             <label :for="fieldName" :hidden="field.isHidden">
-                                {{ field.label }} <span v-if="field.isRequired" style="color:red;"> * </span> :
+                                {{ field.label }}<span v-if="field.isRequired" style="color:red;"> * </span>
                                 <span v-if="field.tooltip && !field.isHidden"
                                       data-toggle="tooltip"
                                       data-placement="bottom"
@@ -70,11 +70,11 @@
                     CreateProjectRequest.fromObject(this.request)
                 );
                 if (createProjectResponse.isSuccess) {
-                    this.$router.push({name: 'CalculatorForm'});
-                    window.sessionStorage.setItem('projectId', createProjectResponse.payload.projectId);
+
+                    this.$router.push({name: 'CalculatorForm', params: {projectId: createProjectResponse.payload.projectId}});
                 }
             },
-        }
+        },
     }
 </script>
 

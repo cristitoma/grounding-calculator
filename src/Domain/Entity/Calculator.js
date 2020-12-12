@@ -1,5 +1,6 @@
 import CalculatorResult from "~/Domain/ValueObject/CalculatorResult";
 import CalculateException from "~/Domain/Exception/CalculateException";
+import Calculate from "~/Application/Command/Calculate";
 
 class Calculator {
     constructor(
@@ -8,6 +9,7 @@ class Calculator {
         verticalElectrodeDiameter,
         verticalElectrodeLength,
         verticalElectrodeDepth,
+        soilType,
         soilResistivity,
         numberOfVerticalElectrodes,
         distanceBetweenVerticalElectrodesL,
@@ -21,23 +23,24 @@ class Calculator {
     ) {
         this.id = id;
         this.projectId = projectId;
-        this.verticalElectrodeDiameter = verticalElectrodeDiameter;
-        this.verticalElectrodeLength = verticalElectrodeLength;
-        this.verticalElectrodeDepth = verticalElectrodeDepth;
-        this.soilResistivity = soilResistivity;
-        this.numberOfVerticalElectrodes = numberOfVerticalElectrodes;
+        this.verticalElectrodeDiameter = parseFloat(verticalElectrodeDiameter);
+        this.verticalElectrodeLength = parseFloat(verticalElectrodeLength);
+        this.verticalElectrodeDepth = parseFloat(verticalElectrodeDepth);
+        this.soilType = soilType;
+        this.soilResistivity = parseFloat(soilResistivity);
+        this.numberOfVerticalElectrodes = parseInt(numberOfVerticalElectrodes);
         this.distanceBetweenVerticalElectrodesL = distanceBetweenVerticalElectrodesL;
         this.verticalElectrodesPlacement = verticalElectrodesPlacement;
-        this.verticalGroundingUF = verticalGroundingUF;
-        this.horizontalGroundingUF = horizontalGroundingUF;
-        this.strapLength = strapLength;
-        this.strapWidth = strapWidth;
-        this.numberOfHorizontalGrounding = numberOfHorizontalGrounding;
-        this.groundDispersionResistance = groundDispersionResistance;
+        this.verticalGroundingUF = parseFloat(verticalGroundingUF);
+        this.horizontalGroundingUF = parseFloat(horizontalGroundingUF);
+        this.strapLength = parseFloat(strapLength);
+        this.strapWidth = parseFloat(strapWidth);
+        this.numberOfHorizontalGrounding = parseInt(numberOfHorizontalGrounding);
+        this.groundDispersionResistance = parseFloat(groundDispersionResistance);
     }
     
     calculate () {
-        return new CalculatorResult(
+        this.result = new CalculatorResult(
             this.soilResistivity,
             this.calculateVerticalElectrodeDispersionResistance(),
             this.calculateDistanceBetweenVerticalElectrodesCM(),
@@ -50,8 +53,12 @@ class Calculator {
         );
     }
     
+    getResult() {
+        return this.result;
+    }
+    
     calculateVerticalElectrodeDispersionResistance() {
-        const h = this.verticalElectrodeDepth + this.verticalElectrodeLength / 2;
+        const h = this.verticalElectrodeDepth + (this.verticalElectrodeLength / 2);
 
         return (0.366
             * this.soilResistivity 
@@ -92,5 +99,16 @@ class Calculator {
         return this.id;
     }
 }
+
+Calculator.DISTANCE_BETWEEN_VERTICAL_ELECTRODES = {
+    1: 'e = l',
+    2: 'e = 2.l',
+    3: 'e = 3.l',
+};
+
+Calculator.VERTICAL_ELECTRODE_PLACEMENT = {
+    1: 'liniar',
+    2: 'pe contur',
+};
 
 export default Calculator;

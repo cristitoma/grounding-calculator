@@ -122,14 +122,21 @@ class CalculatorRepository extends AbstractProjectRepository {
         return calculator;
     }
     
+    getById(id) {
+        return this.storage.get(this.prefix + id);
+    }
+    
     getSoilResistivityBySoilType(soilId) {
         return this.soil[soilId].resistivity;
+    }
+    
+    getSoilType(soilId) {
+        return this.soil[soilId].type;
     }
     
     getVerticalGroundingUtilisationFactor(distanceBetweenVerticalElectrodesL, verticalElectrodesPlacement, numberOfVerticalElectrodes) {
         let element = this.verticalGroundingUtilisationFactor[distanceBetweenVerticalElectrodesL][verticalElectrodesPlacement][numberOfVerticalElectrodes];
         if (typeof element === 'undefined') {
-            console.log('Unsupported number of vertical electrodes');
             throw new CalculateException('Unsupported number of vertical electrodes');
         }
         return element;
@@ -139,7 +146,6 @@ class CalculatorRepository extends AbstractProjectRepository {
         let element = this.horizontalGroundingUtilisationFactor[distanceBetweenVerticalElectrodesL][verticalElectrodesPlacement][numberOfVerticalElectrodes];
         
         if (typeof element === 'undefined') {
-            console.log('Unsupported number of horizontal electrodes');
             throw new CalculateException('Unsupported number of horizontal electrodes');
         }
         

@@ -28,6 +28,10 @@ class ProjectRepository extends AbstractProjectRepository {
         
         return project;
     }
+    
+    getById(id) {
+        return this.storage.get(this.prefix + id);
+    }
 }
 
 export default ProjectRepository;

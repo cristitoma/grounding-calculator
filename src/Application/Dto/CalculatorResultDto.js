@@ -1,5 +1,6 @@
 class CalculatorResultDto {
     constructor(
+        calculatorId,
         soilResistivity,
         verticalElectrodeDispersionResistance,
         distanceBetweenVerticalElectrodesCM,
@@ -10,6 +11,7 @@ class CalculatorResultDto {
         horizontalGroundingResistance,
         multipleGroundingResistance,
     ) {
+        this.calculatorId = calculatorId;
         this.soilResistivity = soilResistivity;
         this.verticalElectrodeDispersionResistance = verticalElectrodeDispersionResistance;
         this.distanceBetweenVerticalElectrodesCM = distanceBetweenVerticalElectrodesCM;
@@ -21,8 +23,9 @@ class CalculatorResultDto {
         this.multipleGroundingResistance = multipleGroundingResistance;
     }
     
-    static createFromObject(object) {
+    static createFromObject(calculatorId, object) {
         return new CalculatorResultDto(
+            calculatorId,
             object.soilResistivity,
             object.verticalElectrodeDispersionResistance,
             object.distanceBetweenVerticalElectrodesCM,

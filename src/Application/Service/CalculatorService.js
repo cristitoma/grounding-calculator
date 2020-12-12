@@ -20,12 +20,13 @@ class CalculatorService {
      * @return {CalculatorResultDto}
      */
     calculate(calculateCommand) {
-        const calculator = new Calculator(
+        let calculator = new Calculator(
             null,
             calculateCommand.projectId,
             calculateCommand.verticalElectrodeDiameter,
             calculateCommand.verticalElectrodeLength,
             calculateCommand.verticalElectrodeDepth,
+            this.calculatorRepository.getSoilType(calculateCommand.soilType),
             this.calculatorRepository.getSoilResistivityBySoilType(calculateCommand.soilType),
             calculateCommand.numberOfVerticalElectrodes,
             calculateCommand.distanceBetweenVerticalElectrodesL,
@@ -38,12 +39,16 @@ class CalculatorService {
             calculateCommand.groundDispersionResistance,
         );
         
-        
-        const calculatorResult = calculator.calculate();
+        calculator.calculate();
+        const calculatorResult = calculator.getResult();
         
         this.calculatorRepository.save(calculator);
 
-        return CalculatorResultDto.createFromObject(calculatorResult);
+        return CalculatorResultDto.createFromObject(calculator.getId(), calculatorResult);
+    }
+    
+    getById(id) {
+        return this.calculatorRepository.getById(id);
     }
 }
 

@@ -28,6 +28,10 @@ class CalculatorController {
             return new CalculateResponse.error(400, {}, e.message);
         }
     }
+    
+    getById(id) {
+        return this.calculatorService.getById(id);
+    }
 }
 
 export default CalculatorController;

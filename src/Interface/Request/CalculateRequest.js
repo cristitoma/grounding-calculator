@@ -1,6 +1,7 @@
 import Calculate from "~/Application/Command/Calculate";
 import NumericField from "~/Interface/FieldType/NumericField";
 import SelectField from "~/Interface/FieldType/SelectField";
+import Calculator from "~/Domain/Entity/Calculator";
 
 class CalculateRequest extends Calculate {
     isValid() {
@@ -65,20 +66,13 @@ class CalculateRequest extends Calculate {
             distanceBetweenVerticalElectrodesL: new SelectField({
                 isRequired: true,
                 label: 'Distanta dintre electrozi, e',
-                list: {
-                    1: 'e = l',
-                    2: 'e = 2.l',
-                    3: 'e = 3.l',
-                },
+                list: Calculator.DISTANCE_BETWEEN_VERTICAL_ELECTRODES,
                 defaultValue: '',
             }),
             verticalElectrodesPlacement: new SelectField({
                 isRequired: true,
                 label: 'Asezare electrozi',
-                list: {
-                    1: 'liniar',
-                    2: 'pe contur',
-                },
+                list: Calculator.VERTICAL_ELECTRODE_PLACEMENT,
                 defaultValue: '',
             }),
             strapLength: new NumericField({

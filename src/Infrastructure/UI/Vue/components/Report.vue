@@ -1,6 +1,6 @@
 <template>
     <div v-if="report !== null">
-        <div class="page html__page-break">
+        <div class="pdf-page html__page-break">
             <h1>CALCULUL INSTALAŢIEI DE LEGARE LA PĂMÂNT DE PROTECŢIE</h1>
             <label>Proiect Nr.:</label> {{report.project.number}} <br>
             <label>Denumire proiect:</label> {{report.project.name}} <br>
@@ -14,7 +14,7 @@
             <label>E-mail:</label> {{report.project.drafter.email}} <br>
             <label>Intocmit:</label> {{report.project.createdAt}} <br>
         </div>
-        <div class="page html__page-break">
+        <div class="pdf-page html__page-break">
             <h1>CALCULUL REZISTENŢEI DE DISPERSIE A PRIZEI DE PĂMÂNT</h1>
             <p>Rezistenţa de dispersie a unui electrod vertical îngropat la adâncimea q se calculează cu relaţia:</p>
             <div class="formula">
@@ -63,7 +63,7 @@
             <p>Rezistenţa prizei verticale multiple, R<sub>v</sub>: {{report.calculator.getResult().verticalGroundingResistance}} Ω</p>
             
         </div>
-        <div class="page html__page-break">
+        <div class="pdf-page html__page-break">
             <p>Rezistenţa unui electrod orizontal pozat la adâncimea q, se calculează cu relaţia:</p>
             
             <div class="formula">
@@ -146,41 +146,41 @@
     }
 </script>
 
-<style scoped>
-    .page {
+<style>
+    .pdf-page {
         padding: 30px 40px;
         width: 800px;
         text-align: left;
         height: 1120px;
         font-size: 14px;
     }
-    .page h1 {
+    .pdf-page h1 {
         font-size: 20px;
         margin-bottom: 25px;
     }
-    div.formula {
+    .pdf-page div.formula {
         display: inline-block;
         vertical-align: middle;
         padding: 0;
     }
-    div.formula > .unit {
+    .pdf-page div.formula > .unit {
         margin-left: 20px;
     }
-    span.frac {
+    .pdf-page span.frac {
         padding:0;
         display: inline-block;
         text-align: center;
         vertical-align: middle;
     }
-    span.frac > sup, span.frac > sub {
+    .pdf-page span.frac > sup, span.frac > sub {
         display: block;
         padding: 0 0.3em;
         font: inherit;
     }
-    span.frac > sup {border-bottom: 0.08em solid; top:0;}
-    span.frac > sub {top:0;}
+    .pdf-page span.frac > sup {border-bottom: 0.08em solid; top:0;}
+    .pdf-page span.frac > sub {top:0;}
     
-    .legend {
+    .pdf-page .legend {
         list-style-type:none;
         text-align:left;
     }

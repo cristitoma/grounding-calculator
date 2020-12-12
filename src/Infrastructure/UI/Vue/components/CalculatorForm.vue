@@ -181,6 +181,9 @@
 </script>
 
 <style scoped>
+    .pdf-report {
+        display: none;
+    }
     hr {
       margin-top: 1rem;
       margin-bottom: 1rem;
